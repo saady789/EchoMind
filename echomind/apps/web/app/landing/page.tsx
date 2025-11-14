@@ -1,7 +1,4 @@
-"use client";
-import Image, { type ImageProps } from "next/image";
-import { useAuth } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -9,29 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Brain, LineChart, Lightbulb, Check } from "lucide-react";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
-
-export default function Home() {
-  const { user, isLoaded, isSignedIn } = useUser();
-
-  console.log("user is ", user);
-
-  if (!isLoaded) return <div>Loading...</div>;
-  if (!user) return <div>You are not signed in</div>;
-
+const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 md:py-32">
         <div className="flex flex-col items-center text-center space-y-8 animate-fade-in">
           <div className="space-y-6 max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-tight text-gray-900 ">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-tight">
               Gain clarity in your founder journey
             </h1>
-            <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto leading-relaxed font-medium text-gray-900">
+            <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto leading-relaxed font-medium">
               EchoMind is an AI powered reflection tool that remembers your
               emotional patterns, recalls similar past challenges, and gives
               insights that help you make better decisions.
@@ -446,4 +431,6 @@ export default function Home() {
       </footer>
     </div>
   );
-}
+};
+
+export default Index;

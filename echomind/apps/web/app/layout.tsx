@@ -9,7 +9,14 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
+import { Brain, LineChart, Lightbulb, Check } from "lucide-react";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -35,38 +42,73 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-gradient-to-b from-slate-950 to-slate-900/80 backdrop-blur-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
-            <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">
-              <div className="text-xl font-semibold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
-                EchoMind
-              </div>
+          <header className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/60 bg-white/95 backdrop-blur-xl shadow-sm">
+            <div className="max-w-7xl mx-auto px-6 sm:px-8">
+              <div className="flex items-center justify-between h-16">
+                {/* Logo */}
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 via-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/40 ring-1 ring-indigo-400/20">
+                    <Brain className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
+                    EchoMind
+                  </span>
+                </div>
 
-              <div className="flex items-center gap-4">
-                <SignedOut>
-                  <SignInButton mode="modal">
-                    <button className="h-10 px-5 rounded-full bg-slate-800/80 text-slate-100 text-sm font-medium backdrop-blur hover:bg-slate-700/80 border border-slate-700 transition">
-                      Sign in
-                    </button>
-                  </SignInButton>
+                {/* Navigation Links - Hidden on mobile */}
+                <nav className="hidden md:flex items-center gap-8">
+                  <a
+                    href="#features"
+                    className="text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all after:duration-200 hover:after:w-full"
+                  >
+                    Features
+                  </a>
+                  <a
+                    href="#how-it-works"
+                    className="text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all after:duration-200 hover:after:w-full"
+                  >
+                    How it works
+                  </a>
+                  <a
+                    href="#testimonials"
+                    className="text-sm font-medium text-slate-700 hover:text-indigo-600 transition-colors duration-200 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-indigo-600 after:transition-all after:duration-200 hover:after:w-full"
+                  >
+                    Testimonials
+                  </a>
+                </nav>
 
-                  <SignUpButton mode="modal">
-                    <button className="h-10 px-5 rounded-full bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-400 shadow-lg shadow-indigo-600/30 transition">
-                      Sign up
-                    </button>
-                  </SignUpButton>
-                </SignedOut>
+                {/* Auth Buttons */}
+                <div className="flex items-center gap-3">
+                  {/* If NOT signed in */}
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <Button
+                        variant="ghost"
+                        className="hidden sm:inline-flex h-10 px-5 rounded-full text-slate-700 hover:text-indigo-600 hover:bg-indigo-50/80 font-medium text-sm transition-all duration-200"
+                      >
+                        Sign in
+                      </Button>
+                    </SignInButton>
 
-                <SignedIn>
-                  <UserButton
-                    appearance={{
-                      elements: {
-                        userButtonAvatarBox:
-                          "ring-2 ring-slate-700 hover:ring-indigo-500 transition rounded-full",
-                      },
-                    }}
-                    afterSignOutUrl="/"
-                  />
-                </SignedIn>
+                    <SignUpButton mode="modal">
+                      <Button className="h-10 px-6 rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-medium text-sm shadow-lg shadow-indigo-600/40 hover:shadow-xl hover:shadow-indigo-600/50 transition-all duration-200">
+                        Get started
+                      </Button>
+                    </SignUpButton>
+                  </SignedOut>
+
+                  {/* If signed in */}
+                  <SignedIn>
+                    <UserButton
+                      appearance={{
+                        elements: {
+                          avatarBox:
+                            "w-9 h-9 ring-2 ring-indigo-500/50 shadow-md",
+                        },
+                      }}
+                    />
+                  </SignedIn>
+                </div>
               </div>
             </div>
           </header>
