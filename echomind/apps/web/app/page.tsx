@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Brain, LineChart, Lightbulb, Check } from "lucide-react";
+import { useEffect } from "react";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -17,7 +18,18 @@ type Props = Omit<ImageProps, "src"> & {
 export default function Home() {
   const { user, isLoaded, isSignedIn } = useUser();
 
-  console.log("user is ", user);
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn) return;
+
+    // call your endpoint only once after login
+    fetch("/api/addUser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user,
+      }),
+    });
+  }, [isLoaded, isSignedIn, user]);
 
   if (!isLoaded) return <div>Loading...</div>;
   if (!user) return <div>You are not signed in</div>;

@@ -2,119 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    /* Hardcoded indigo primary color */
     --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+    --foreground: 240 5% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-
-    /* Indigo as primary */
-    --primary: 239 84% 67%;
+    /* Purple primary */
+    --primary: 245 72% 55%;
     --primary-foreground: 0 0% 100%;
 
-    /* Slate as secondary */
-    --secondary: 215 16% 47%;
-    --secondary-foreground: 0 0% 100%;
-
-    /* Slate fifty for muted */
-    --muted: 210 40% 98%;
-    --muted-foreground: 215 16% 47%;
-
-    /* Violet as accent */
-    --accent: 258 90% 66%;
+    /* Accent purple */
+    --accent: 245 70% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    /* Secondary neutral */
+    --secondary: 240 5% 95%;
+    --secondary-foreground: 240 10% 4%;
+
+    /* Muted */
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 45%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Slate borders */
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 239 84% 67%;
+    --border: 240 6% 88%;
+    --input: 240 6% 88%;
+    --ring: 245 72% 55%;
 
-    --radius: 0.75rem;
+    --chart-1: 245 72% 55%;
+    --chart-2: 260 80% 60%;
+    --chart-3: 230 70% 55%;
+    --chart-4: 200 75% 60%;
+    --chart-5: 280 65% 60%;
 
-    /* Custom design tokens with hardcoded indigo and violet */
-    --gradient-hero: linear-gradient(
-      135deg,
-      hsl(239 84% 67%),
-      hsl(258 90% 66%)
-    );
-    --gradient-subtle: linear-gradient(
-      180deg,
-      hsl(0 0% 100%),
-      hsl(210 40% 98%)
-    );
-    --shadow-glow: 0 0 40px hsl(239 84% 67% / 0.15);
-    --shadow-card: 0 4px 20px hsl(215 25% 27% / 0.08);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 6%;
+    --foreground: 0 0% 100%;
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-
-    /* Indigo as primary */
-    --primary: 239 84% 67%;
+    --primary: 245 72% 65%;
     --primary-foreground: 0 0% 100%;
 
-    /* Slate as secondary */
-    --secondary: 215 25% 27%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 215 25% 27%;
-    --muted-foreground: 215 20% 65%;
-
-    /* Violet as accent */
-    --accent: 258 90% 66%;
+    --accent: 245 70% 75%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --secondary: 240 10% 20%;
+    --secondary-foreground: 0 0% 100%;
 
-    --border: 215 25% 27%;
-    --input: 215 25% 27%;
-    --ring: 239 84% 67%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --muted: 240 10% 18%;
+    --muted-foreground: 0 0% 75%;
+
+    --card: 240 10% 12%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 240 10% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 245 72% 65%;
   }
 }
 
@@ -122,7 +80,6 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
   }
