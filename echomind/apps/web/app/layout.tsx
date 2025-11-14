@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,10 +30,50 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className="fixed top-0 left-0 w-full z-50 border-b border-slate-800 bg-gradient-to-b from-slate-950 to-slate-900/80 backdrop-blur-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+            <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">
+              <div className="text-xl font-semibold tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+                EchoMind
+              </div>
+
+              <div className="flex items-center gap-4">
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <button className="h-10 px-5 rounded-full bg-slate-800/80 text-slate-100 text-sm font-medium backdrop-blur hover:bg-slate-700/80 border border-slate-700 transition">
+                      Sign in
+                    </button>
+                  </SignInButton>
+
+                  <SignUpButton mode="modal">
+                    <button className="h-10 px-5 rounded-full bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-400 shadow-lg shadow-indigo-600/30 transition">
+                      Sign up
+                    </button>
+                  </SignUpButton>
+                </SignedOut>
+
+                <SignedIn>
+                  <UserButton
+                    appearance={{
+                      elements: {
+                        userButtonAvatarBox:
+                          "ring-2 ring-slate-700 hover:ring-indigo-500 transition rounded-full",
+                      },
+                    }}
+                    afterSignOutUrl="/"
+                  />
+                </SignedIn>
+              </div>
+            </div>
+          </header>
+
+          <div className="pt-16">{children}</div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
